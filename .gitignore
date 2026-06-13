@@ -1,0 +1,10 @@
+# Windows system files
+Thumbs.db
+desktop.ini
+
+# IDEs and editors
+.vscode/
+.idea/
+
+# Deployment script
+deploy.ps1
