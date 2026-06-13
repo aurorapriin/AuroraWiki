@@ -195,9 +195,10 @@ body.light-mode .mobile-header {
 }
 
 .mobile-header .brand .logo-icon {
-    width: 24px;
-    height: 24px;
-    color: var(--color-primary);
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
 }
 
 .mobile-header .brand .logo-text {
@@ -268,9 +269,10 @@ body.light-mode .sidebar {
 }
 
 .sidebar-header .brand .logo-icon {
-    width: 30px;
-    height: 30px;
-    color: var(--color-primary);
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
 }
 
 .sidebar-header .brand .logo-text {
