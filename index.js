@@ -148,7 +148,8 @@ const iconMap = {
     swords: "swords",
     "alert-triangle": "alert-triangle",
     dice: "dice",
-    calendar: "calendar"
+    calendar: "calendar",
+    crown: "crown"
 };
 
 // Safe Lucide helper to prevent script crash on CDN failure

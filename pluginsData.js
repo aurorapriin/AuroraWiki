@@ -374,5 +374,86 @@ menu-slots:
   redirection: 44
   death-bypass: 52
   hide-and-seek: 49`
+  },
+  {
+    id: "auroradominion",
+    name: "AuroraDominion",
+    version: "1.0.0",
+    logo: "assets/logo_auroradominion.png",
+    icon: "crown",
+    color: "#ffd700",
+    tagline_pt: "Destaque e gerencie o jogador dominante em regiões do WorldGuard",
+    tagline_en: "Track and crown the dominant player within WorldGuard regions",
+    description_pt: "Plugin de alta performance para gerenciar o jogador com mais kills dentro de regiões específicas do WorldGuard.",
+    description_en: "High-performance plugin to track and reward the player with the most kills inside specific WorldGuard regions.",
+    features_pt: [
+      "Monitoramento via WorldGuard: registra apenas abates (PvP direto) ocorridos fisicamente dentro das regiões configuradas.",
+      "Configurações Flexíveis: customize mensagens de chat, títulos, subtítulos, ActionBar e nome de exibição de cada região.",
+      "Segurança Anti-Farm: cooldown configurável entre abates repetidos dos mesmos jogadores para evitar fraudes.",
+      "Persistência Otimizada: suporte a SQLite e MySQL/MariaDB com pool de conexões eficiente via HikariCP.",
+      "Performance de Elite: todas as operações de banco de dados e sincronizações rodam de forma assíncrona, garantindo zero impacto no TPS.",
+      "Integração PAPI e FancyHolograms: exiba estatísticas e rankings de abates em tempo real através de hologramas, placares e chats.",
+      "Salvamento de Coordenadas: comando simples para definir a localização física do holograma de classificação de cada região."
+    ],
+    features_en: [
+      "WorldGuard Monitoring: tracks and counts PvP deaths occurring physically inside configured region boundaries.",
+      "Customizable Output: edit chat broadcasts, titles, subtitles, action bar notices, and custom region display names.",
+      "Anti-Farm Protection: configurable cooldown between registered kills of the same player pair to prevent leaderboard farming.",
+      "Robust Persistence: asynchronous SQLite and MySQL/MariaDB connections using HikariCP pooling.",
+      "Lag-Free Design: all database transactions and placeholder updates run completely off the main thread to ensure zero TPS impact.",
+      "PAPI & FancyHolograms Support: serve leaderboard statistics straight from active memory cache to scoreboards, chats, or hologram plugins.",
+      "Custom Hologram Positions: register coordinate vectors for hologram spawning positions via simple commands."
+    ],
+    commands: [
+      { cmd: "/ad reload", desc_pt: "Recarrega todas as configurações (config.yml, messages.yml, etc.) e atualiza os caches.", desc_en: "Instantly reloads configurations and flushes expansions cache.", perm: "auroradominion.admin" },
+      { cmd: "/ad sethologram <região>", desc_pt: "Define o ponto do holograma para a região informada na sua localização atual.", desc_en: "Sets your current coordinates as the spawning location of the region's hologram.", perm: "auroradominion.admin" }
+    ],
+    permissions: [
+      { node: "auroradominion.use", desc_pt: "Permissão básica para usar os comandos do AuroraDominion.", desc_en: "Grants basic access to AuroraDominion commands." },
+      { node: "auroradominion.admin", desc_pt: "Permissão administrativa para recarregar configurações e definir posições de hologramas.", desc_en: "Grants administrative permission to reload and set hologram points." }
+    ],
+    mechanics_pt: `
+      <h3>Prevenção de Abuso & Anti-Farm</h3>
+      <p>O AuroraDominion possui um sistema integrado de <strong>cooldown de kill</strong> para inibir o farm de classificação. Se um jogador matar a mesma vítima dentro do intervalo configurável (padrão: 300 segundos), a kill não será computada para o ranking de dominância da região.</p>
+      
+      <h3>Integração PAPI e Hologramas</h3>
+      <p>O plugin expõe estatísticas na memória em tempo real para integração com plugins de holograma, como o <strong>FancyHolograms</strong>, permitindo exibir a lista dos jogadores dominantes de cada região de forma dinâmica e leve no servidor.</p>
+    `,
+    mechanics_en: `
+      <h3>Abuse Prevention & Anti-Farm</h3>
+      <p>AuroraDominion features an integrated <strong>kill cooldown</strong> system to prevent leaderboard farming. If a player kills the same victim within the configurable interval (default: 300 seconds), the kill is not counted toward the region's dominance ranking.</p>
+      
+      <h3>PAPI Integration and Holograms</h3>
+      <p>The plugin exposes real-time statistics in memory for integration with hologram plugins like <strong>FancyHolograms</strong>, allowing servers to display the list of dominant players for each region dynamically and efficiently.</p>
+    `,
+    config: `# Database settings: "sqlite" or "mysql"
+database:
+  type: "sqlite"
+  
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "minecraft"
+    username: "root"
+    password: ""
+    pool:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+# Cooldown (in seconds) between kills of the same victim by the same killer
+kill-cooldown: 300
+
+# The list of WorldGuard region IDs to monitor and track kills in
+tracked-regions:
+  pvp_arena:
+    display-name: "&cArena de Combate"
+
+# Inactivity settings
+inactivity:
+  exclude-days: 7
+  check-interval: 60`
   }
 ];
