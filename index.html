@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Documentação oficial dos plugins de Minecraft da coleção Aurora. Comandos, permissões, mecânicas e guias de configuração.">
+    <meta name="author" content="Aurorapriin">
+    <title>AuroraWiki | Documentação de Plugins</title>
+    <!-- Google Fonts: Outfit (headings) & Inter (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Local styles (with cache busting) -->
+    <link rel="stylesheet" href="index.css?v=1.0.2">
+    <!-- Lucide Icons for premium visual icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- GSAP for smooth interactive transitions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Mobile Header -->
+        <header class="mobile-header">
+            <div class="brand">
+                <i data-lucide="compass" class="logo-icon"></i>
+                <span class="logo-text">AuroraWiki</span>
+            </div>
+            <div class="mobile-controls-row">
+                <button id="mobile-theme-toggle" class="control-btn" aria-label="Alternar Tema">
+                    <i data-lucide="moon"></i>
+                </button>
+                <div class="mobile-lang-selector">
+                    <button class="mobile-lang-btn active" id="mobile-lang-pt" onclick="changeLanguage('pt')">PT</button>
+                    <button class="mobile-lang-btn" id="mobile-lang-en" onclick="changeLanguage('en')">EN</button>
+                </div>
+                <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Abrir Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <i data-lucide="compass" class="logo-icon"></i>
+                    <span class="logo-text">AuroraWiki</span>
+                </div>
+                <button class="sidebar-close" id="sidebar-close" aria-label="Fechar Menu">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <!-- Theme and Language Switch Controls -->
+            <div class="theme-lang-controls">
+                <button id="theme-toggle" class="control-btn" aria-label="Alternar Tema" title="Alternar Tema">
+                    <i data-lucide="moon" class="theme-icon-dark"></i>
+                    <i data-lucide="sun" class="theme-icon-light" style="display: none;"></i>
+                </button>
+                <div class="lang-selector">
+                    <button class="lang-btn active" id="lang-pt" onclick="changeLanguage('pt')">PT</button>
+                    <button class="lang-btn" id="lang-en" onclick="changeLanguage('en')">EN</button>
+                </div>
+            </div>
+
+            <!-- Global Search -->
+            <div class="search-box">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" id="global-search" placeholder="Buscar comando, permissão..." aria-label="Buscar na Wiki">
+                <button id="search-clear" class="search-clear" aria-label="Limpar busca" style="display: none;">
+                    <i data-lucide="x-circle"></i>
+                </button>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <ul>
+                        <li>
+                            <a href="#/home" class="nav-link active" id="nav-home">
+                                <i data-lucide="home"></i>
+                                <span id="label-nav-home">Início</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/setup" class="nav-link" id="nav-setup">
+                                <i data-lucide="terminal"></i>
+                                <span id="label-nav-setup">Instalação & Setup</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <span class="section-title" id="label-section-plugins">Plugins Aurora</span>
+                    <ul id="plugins-menu-list">
+                        <!-- Populated dynamically via JS -->
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="author-info">
+                    <i data-lucide="user"></i>
+                    <span id="label-author-info">Criado por <a href="https://github.com/aurorapriin" target="_blank" rel="noopener noreferrer"><strong>Aurorapriin</strong></a></span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Overlay for mobile menu background -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="main-content">
+            <!-- Loading placeholder initially -->
+            <div class="loading-container">
+                <div class="spinner"></div>
+                <p id="label-loading">Carregando documentação...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Toast for Copy Confirmation -->
+    <div class="toast" id="toast">
+        <i data-lucide="check-circle" class="toast-icon"></i>
+        <span class="toast-message" id="label-toast-success">Copiado para a área de transferência!</span>
+    </div>
+
+    <!-- Load scripts (with cache busting) -->
+    <script src="pluginsData.js?v=1.0.2"></script>
+    <script src="index.js?v=1.0.2"></script>
+</body>
+</html>
